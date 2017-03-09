@@ -2,7 +2,7 @@
 -- Default awesome theme --
 ---------------------------
 
-theme = {}
+local theme = {}
 
 --theme.font          = "sans 10"
 theme.font          = "Inconsolata Medium 10"
@@ -22,6 +22,7 @@ theme.fg_focus      = "#ffffff"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
+theme.useless_gap   = 0
 theme.border_width  = 1
 theme.border_normal = "#000000"
 theme.border_focus  = "#535d6c"
@@ -57,6 +58,9 @@ theme.menu_width  = 100
 -- Define the image to load
 theme.titlebar_close_button_normal = "/usr/share/awesome/themes/default/titlebar/close_normal.png"
 theme.titlebar_close_button_focus  = "/usr/share/awesome/themes/default/titlebar/close_focus.png"
+
+theme.titlebar_minimize_button_normal = "/usr/share/awesome/themes/default/titlebar/minimize_normal.png"
+theme.titlebar_minimize_button_focus  = "/usr/share/awesome/themes/default/titlebar/minimize_focus.png"
 
 theme.titlebar_ontop_button_normal_inactive = "/usr/share/awesome/themes/default/titlebar/ontop_normal_inactive.png"
 theme.titlebar_ontop_button_focus_inactive  = "/usr/share/awesome/themes/default/titlebar/ontop_focus_inactive.png"
@@ -94,6 +98,11 @@ theme.layout_tiletop = "/usr/share/awesome/themes/default/layouts/tiletopw.png"
 theme.layout_spiral  = "/usr/share/awesome/themes/default/layouts/spiralw.png"
 theme.layout_dwindle = "/usr/share/awesome/themes/default/layouts/dwindlew.png"
 
+theme.layout_cornernw = "/usr/share/awesome/themes/default/layouts/cornernww.png"
+theme.layout_cornerne = "/usr/share/awesome/themes/default/layouts/cornernew.png"
+theme.layout_cornersw = "/usr/share/awesome/themes/default/layouts/cornersww.png"
+theme.layout_cornerse = "/usr/share/awesome/themes/default/layouts/cornersew.png"
+
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
 
 -- Define the icon theme for application icons. If not set then the icons 
@@ -101,4 +110,5 @@ theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
 theme.icon_theme = nil
 
 return theme
+
 -- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:textwidth=80
