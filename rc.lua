@@ -122,24 +122,33 @@ mytextclock = wibox.widget.textclock()
 
 -- Create battery widgets
 batwidget0 = wibox.widget.progressbar()
-batwidget0:set_width(8)
-batwidget0:set_height(10)
-batwidget0:set_vertical(true)
-batwidget0:set_background_color("#494B4F")
-batwidget0:set_border_color(nil)
+batwidget0:set_background_color("#FF5656")
 batwidget0:set_color("#AECF96")
-batwidget0:set_color({ type = "linear", from = { 0, 0 }, to = { 10, 0 },
-                       stops = { {0, "#AECF96"}, {0.5, "#88A175"}, {1, "#FF5656"}}})
 
+batbox0 = wibox.widget {
+    {
+        max_value     = 1,
+        widget        = batwidget0,
+    },
+    forced_height = 10,
+    forced_width  = 8,
+    direction     = 'east',
+    layout        = wibox.container.rotate,
+}
 batwidget1 = wibox.widget.progressbar()
-batwidget1:set_width(8)
-batwidget1:set_height(10)
-batwidget1:set_vertical(true)
-batwidget1:set_background_color("#494B4F")
-batwidget1:set_border_color(nil)
+batwidget1:set_background_color("#FF5656")
 batwidget1:set_color("#AECF96")
-batwidget1:set_color({ type = "linear", from = { 0, 0 }, to = { 10, 0 },
-                       stops = { {0, "#AECF96"}, {0.5, "#88A175"}, {1, "#FF5656"}}})
+
+batbox1 = wibox.widget {
+    {
+        max_value     = 1,
+        widget        = batwidget1,
+    },
+    forced_height = 10,
+    forced_width  = 8,
+    direction     = 'east',
+    layout        = wibox.container.rotate,
+}
 
 -- Register battery widgets
 vicious.register(batwidget0, vicious.widgets.bat, "$2", 61, "BAT0")
@@ -243,8 +252,8 @@ awful.screen.connect_for_each_screen(function(s)
             layout = wibox.layout.fixed.horizontal,
             mykeyboardlayout,
             wibox.widget.systray(),
-            batwidget0,
-            batwidget1,
+            batbox0,
+            batbox1,
             mytextclock,
             s.mylayoutbox,
         },
