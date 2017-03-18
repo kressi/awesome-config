@@ -121,38 +121,35 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 mytextclock = wibox.widget.textclock()
 
 -- Create battery widgets
-batwidget0 = wibox.widget.progressbar()
-batwidget0:set_background_color("#FF5656")
-batwidget0:set_color("#AECF96")
+local function batwidget(bat)
+    local batwidget = wibox.widget.progressbar()
+    batwidget:set_background_color("#FF5656")
+    batwidget:set_color("#AECF96")
 
-batbox0 = wibox.widget {
+    -- Register battery widget
+    vicious.register(batwidget, vicious.widgets.bat, "$2", 61, bat)
+
+    return batwidget
+end
+
+local function batbox(bw)
+    return wibox.widget {
     {
         max_value     = 1,
-        widget        = batwidget0,
+        widget        = bw,
     },
     forced_height = 10,
     forced_width  = 8,
     direction     = 'east',
     layout        = wibox.container.rotate,
-}
-batwidget1 = wibox.widget.progressbar()
-batwidget1:set_background_color("#FF5656")
-batwidget1:set_color("#AECF96")
+    }
+end
 
-batbox1 = wibox.widget {
-    {
-        max_value     = 1,
-        widget        = batwidget1,
-    },
-    forced_height = 10,
-    forced_width  = 8,
-    direction     = 'east',
-    layout        = wibox.container.rotate,
-}
+batwidget0 = batwidget("BAT0")
+batbox0 = batbox(batwidget0)
 
--- Register battery widgets
-vicious.register(batwidget0, vicious.widgets.bat, "$2", 61, "BAT0")
-vicious.register(batwidget1, vicious.widgets.bat, "$2", 67, "BAT1")
+batwidget1 = batwidget("BAT1")
+batbox1 = batbox(batwidget1)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = awful.util.table.join(
