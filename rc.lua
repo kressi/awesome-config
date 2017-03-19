@@ -137,6 +137,8 @@ local function batbox(bw)
     {
         max_value     = 1,
         widget        = bw,
+        border_width  = 0.5,
+        border_color  = "#000000",
     },
     forced_height = 10,
     forced_width  = 8,
