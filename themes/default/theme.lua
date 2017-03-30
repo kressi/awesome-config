@@ -11,7 +11,11 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "sans 8"
+theme.font          = "Inconsolata Medium 10"
+
+-- http://awesome.naquadah.org/wiki/Symbolic_tag_names
+-- make tag list bigger
+theme.taglist_font  = "Inconsolata Medium 14"
 
 theme.bg_normal     = "#222222"
 theme.bg_focus      = "#535d6c"
