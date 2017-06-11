@@ -122,44 +122,81 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
--- Create battery widgets
-local function batwidget(bat)
-    local batwidget = wibox.widget.progressbar()
-
+local function batbox(bat)
+    local pbar = wibox.widget.progressbar()
+    
     -- Register battery widget
-    vicious.register(batwidget, vicious.widgets.bat, "$2", 61, bat)
+    vicious.register(pbar, vicious.widgets.bat, "$2", 61, bat)
 
-    return batwidget
-end
-
-local function batbox(bw)
-    local bb = wibox.widget {
-    {
-        max_value     = 1,
-        widget        = bw,
-        border_width  = 0.5,
-        border_color  = "#000000",
-        color         = {
-            type = "linear",
-            from = { 0, 0 },
-            to = { 0, 30 },
-            stops = {
-                { 0, "#AECF96" },
-                { 1, "#FF5656" }
+    local batwidget = wibox.widget {
+        {
+            max_value     = 1,
+            widget        = pbar,
+            border_width  = 0.5,
+            border_color  = "#000000",
+            color         = {
+                type = "linear",
+                from = { 0, 0 },
+                to = { 0, 30 },
+                stops = {
+                    { 0, "#AECF96" },
+                    { 1, "#FF5656" }
+                }
             }
-        }
-    },
-    forced_height = 10,
-    forced_width  = 8,
-    direction     = 'east',
-    color         = beautiful.fg_widget,
-    layout        = wibox.container.rotate,
+        },
+        forced_height = 10,
+        forced_width  = 8,
+        direction     = 'east',
+        color         = beautiful.fg_widget,
+        layout        = wibox.container.rotate,
     }
-    return wibox.layout.margin(bb, 1, 1, 2, 2)
+    return wibox.layout.margin(batwidget, 1, 1, 2, 2)
 end
 
-batbox0 = batbox(batwidget("BAT0"))
-batbox1 = batbox(batwidget("BAT1"))
+
+local function batbox_state(bat)
+    local pbar = wibox.widget.progressbar()
+    local tbox = wibox.widget.textbox()
+    
+    -- Register battery widget
+    vicious.register(pbar, vicious.widgets.bat, "$2", 61, bat)
+    vicious.register(tbox, vicious.widgets.bat, "$1", 62, bat)
+
+    local batwidget = wibox.widget {
+        {
+            {
+                max_value     = 1,
+                widget        = pbar,
+                border_width  = 0.5,
+                border_color  = "#000000",
+                color         = {
+                    type = "linear",
+                    from = { 0, 0 },
+                    to = { 0, 30 },
+                    stops = {
+                        { 0, "#AECF96" },
+                        { 1, "#FF5656" }
+                    }
+                }
+            },
+            forced_height = 10,
+            forced_width  = 9,
+            direction     = 'east',
+            color         = beautiful.fg_widget,
+            layout        = wibox.container.rotate,
+        },
+        {
+            tbox,
+            widget = wibox.container.background,
+            fg     = "#000000",
+        },
+        layout = wibox.layout.stack
+    }
+    return wibox.layout.margin(batwidget, 1, 1, 2, 2)
+end
+
+batbox0 = batbox_state("BAT0")
+batbox1 = batbox_state("BAT1")
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
