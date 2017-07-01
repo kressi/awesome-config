@@ -122,6 +122,7 @@ mykeyboardlayout = awful.widget.keyboardlayout()
 -- Create a textclock widget
 mytextclock = wibox.widget.textclock()
 
+-- Create a progressbar showing charge level of a battery
 local function batbox(bat)
     local pbar = wibox.widget.progressbar()
     
@@ -153,7 +154,8 @@ local function batbox(bat)
     return wibox.layout.margin(batwidget, 1, 1, 2, 2)
 end
 
-
+-- Create progressbar showing charge level of a battery,
+-- overlaied by state (charging, full etc.)
 local function batbox_state(bat)
     local pbar = wibox.widget.progressbar()
     local tbox = wibox.widget.textbox()
@@ -423,10 +425,9 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight +5") end),
 
     -- Volume
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("amixer -q set Master 5-") end),
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("amixer -q set Master 5+") end),
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("amixer -q set Master toggle") end)
-
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("sh -c 'pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%'") end),
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("sh -c 'pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%'") end),
+    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("pactl set-sink-mute 0 toggle") end)
 )
 
 clientkeys = gears.table.join(
