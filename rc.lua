@@ -416,18 +416,18 @@ globalkeys = gears.table.join(
               {description = "show the menubar", group = "launcher"}),
 
     -- Screenshot
-    --awful.key({         }, "Print", function () awful.util.spawn("maim -s ~/pictures/" .. os.date("%Y-%m-%d-%X") .. ".png") end),
-    awful.key({         }, "Print", function () awful.util.spawn_with_shell("maim -s ~/pictures/$(date +%F-%T).png") end),
-    awful.key({ "Shift" }, "Print", function () awful.util.spawn_with_shell("maim ~/pictures/$(date +%F-%T).png") end),
+    --awful.key({         }, "Print", function () awful.spawn("maim -s ~/pictures/" .. os.date("%Y-%m-%d-%X") .. ".png") end),
+    awful.key({         }, "Print", function () awful.spawn.with_shell("maim -s ~/pictures/$(date +%F-%T).png") end),
+    awful.key({ "Shift" }, "Print", function () awful.spawn.with_shell("maim ~/pictures/$(date +%F-%T).png") end),
 
     -- Brightness
-    awful.key({ }, "XF86MonBrightnessDown", function () awful.util.spawn("xbacklight -5") end),
-    awful.key({ }, "XF86MonBrightnessUp", function () awful.util.spawn("xbacklight +5") end),
+    awful.key({ }, "XF86MonBrightnessDown", function () awful.spawn("xbacklight -5") end),
+    awful.key({ }, "XF86MonBrightnessUp",   function () awful.spawn("xbacklight +5") end),
 
     -- Volume
-    awful.key({ }, "XF86AudioLowerVolume", function () awful.util.spawn("sh -c 'pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%'") end),
-    awful.key({ }, "XF86AudioRaiseVolume", function () awful.util.spawn("sh -c 'pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%'") end),
-    awful.key({ }, "XF86AudioMute", function () awful.util.spawn("pactl set-sink-mute 0 toggle") end)
+    awful.key({ }, "XF86AudioLowerVolume", function () awful.spawn("sh -c 'pactl set-sink-mute 0 false ; pactl set-sink-volume 0 -5%'") end),
+    awful.key({ }, "XF86AudioRaiseVolume", function () awful.spawn("sh -c 'pactl set-sink-mute 0 false ; pactl set-sink-volume 0 +5%'") end),
+    awful.key({ }, "XF86AudioMute",        function () awful.spawn("pactl set-sink-mute 0 toggle") end)
 )
 
 clientkeys = gears.table.join(
